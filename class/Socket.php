@@ -49,7 +49,7 @@ class Socket
 	 * Send data to the socket
 	 * @param string $str
 	 */
-	public function write($str)
+	public function send($str)
 	{
 		socket_write($this->socket, $str, strlen($str));
 	}
