@@ -30,6 +30,7 @@ class Socket
 				exit('[ERROR] Socket creation failed : ' . $this->getLastSocketError() . PHP_EOL);
 
 			// Socket Connection
+			echo 'Connecting to '.$this->address.':'.$this->port.PHP_EOL;
 			$result = socket_connect($this->socket, $this->address, $this->port);
 			if ($result === false)
 				exit('[ERROR] Connexion failed : ' . $this->getLastSocketError() . PHP_EOL);
