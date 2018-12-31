@@ -60,12 +60,8 @@ class Socket
 	public function read()
 	{
 		$result = '';
-		while ($out = socket_read($this->socket, 2048)) {
-			if ($result)
-				return false;
-			else
+		while ($out = socket_read($this->socket, 2048))
 				$result .= $out;
-		}
 		return $result;
 	}
 
