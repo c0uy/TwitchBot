@@ -14,8 +14,8 @@ $message = "HEAD / HTTP/1.0\r\n\r\n";
 $message .= "Host: www.example.com\r\n";
 $message .= "Connection: Close\r\n\r\n";
 
-echo 'Writing Data ...'.PHP_EOL;
-$socket->write($message);
+echo 'Sending Data ...'.PHP_EOL;
+$socket->send($message);
 
 echo 'Receiving Data ...'.PHP_EOL;
 echo $socket->read().PHP_EOL;
