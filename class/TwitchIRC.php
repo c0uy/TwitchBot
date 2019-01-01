@@ -47,6 +47,6 @@ class TwitchIRC
 	public function join($channel)
 	{
 		$this->send('JOIN #'.$channel);
-		echo $this->read();
+		return !empty($this->read());
 	}
 }
