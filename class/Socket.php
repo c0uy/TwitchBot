@@ -45,6 +45,7 @@ class Socket
 	 */
 	public function close()
 	{
+		echo 'Closing connection ...'.PHP_EOL;
 		socket_close($this->socket);
 	}
 
