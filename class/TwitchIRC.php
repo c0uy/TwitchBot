@@ -1,6 +1,6 @@
 <?php
 
-class IRC
+class TwitchIRC
 {
 	private $socket;
 
