@@ -60,10 +60,10 @@ class Socket
 	 */
 	public function read()
 	{
-		$result = '';
-		while ($out = socket_read($this->socket, 2048))
-				$result .= $out;
-		return $result;
+		$buffer = '';
+		while ($data = socket_read($this->socket, 2048))
+			$buffer .= $data;
+		return $buffer;
 	}
 
 	public function getLastSocketError() {
