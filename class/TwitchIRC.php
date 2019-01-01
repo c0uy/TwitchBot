@@ -41,6 +41,4 @@ class TwitchIRC
 		$this->send('JOIN #'.$channel);
 		echo $this->read();
 	}
-
-
 }
