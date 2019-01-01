@@ -35,4 +35,12 @@ class TwitchIRC
 		$this->send('NICK '.$username);
 		echo $this->read();
 	}
+
+	public function join($channel)
+	{
+		$this->send('JOIN #'.$channel);
+		echo $this->read();
+	}
+
+
 }
