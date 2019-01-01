@@ -33,7 +33,15 @@ class TwitchIRC
 	{
 		$this->send('PASS oauth:'.$oauth);
 		$this->send('NICK '.$username);
-		echo $this->read();
+
+		$buffer = $this->read();
+		$res = false;
+		if(!empty($buffer)) {
+			$bufferExp = explode(':', explode("\n", $buffer)[0]);
+			if(!empty($bufferExp[2]) && trim($bufferExp[2]) !== 'Login authentication failed')
+				$res = true;
+		}
+		return $res;
 	}
 
 	public function join($channel)
