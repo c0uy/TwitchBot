@@ -3,6 +3,7 @@
 class TwitchIRC
 {
 	private $socket;
+	private $channel;
 
 	public function __construct()
 	{
@@ -47,6 +48,9 @@ class TwitchIRC
 	public function join($channel)
 	{
 		$this->send('JOIN #'.$channel);
-		return !empty($this->read());
+		$isJoined = !empty($this->read());
+		if ($isJoined)
+			$this->channel = $channel;
+		return $isJoined;
 	}
 }
