@@ -28,4 +28,11 @@ class TwitchIRC
 	{
 		$this->socket->close();
 	}
+
+	public function login($username, $oauth)
+	{
+		$this->send('PASS oauth:'.$oauth);
+		$this->send('NICK '.$username);
+		echo $this->read();
+	}
 }
