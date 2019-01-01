@@ -34,6 +34,9 @@ class Socket
 			$result = socket_connect($this->socket, $this->address, $this->port);
 			if ($result === false)
 				exit('[ERROR] Connexion failed : ' . $this->getLastSocketError() . PHP_EOL);
+
+			if(!socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 1, "usec" => 50000)))
+				exit('[ERROR] Socket Option Failed : couldn\'t set reception timeout'.PHP_EOL);
 		}
 	}
 
