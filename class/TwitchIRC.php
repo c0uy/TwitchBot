@@ -55,6 +55,12 @@ class TwitchIRC
 		return $isJoined;
 	}
 
+	public function part()
+	{
+		if(!empty($this->channel))
+			$this->send('PART #'.$this->channel);
+	}
+
 	public function sendMessage($message)
 	{
 		if(!empty($this->channel))
