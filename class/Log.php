@@ -32,9 +32,9 @@ class Log
 	{
 		$str = $this->colorizeStr($message, $color);
 		if($exit)
-			echo $str;
-		else
 			exit($str);
+		else
+			echo $str;
 	}
 
 	public function println($message, $color = 'NORMAL', $exit = false)
