@@ -7,7 +7,7 @@ class TwitchIRC
 
 	public function __construct()
 	{
-		$this->socket = new Socket();;
+		$this->socket = new Socket();
 	}
 
 	public function connect($address, $port)
