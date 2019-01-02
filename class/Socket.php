@@ -24,23 +24,23 @@ class Socket
 
 		// Address & Port
 		if ($this->setAddress($address) === false)
-			$log->println('[ERROR] Invalid address : ' . $address, ERROR_COLOR, true);
+			$log->println('[ERROR] Invalid address : ' . $address, COLOR_ERROR, true);
 		if ($this->setPort($port) === false)
-			$log->println('[ERROR] Invalid port : ' . $port, ERROR_COLOR, true);
+			$log->println('[ERROR] Invalid port : ' . $port, COLOR_ERROR, true);
 
 		if(!empty($this->address) && !empty($this->port)) {
 			// Socket Creation
 			$this->socket = socket_create($this->domains[$this->version], SOCK_STREAM, SOL_TCP);
 			if ($this->socket === false)
-				$log->println('[ERROR] Socket creation failed : ' . $this->getLastSocketError(), ERROR_COLOR, true);
+				$log->println('[ERROR] Socket creation failed : ' . $this->getLastSocketError(), COLOR_ERROR, true);
 
 			// Socket Connection
 			$result = socket_connect($this->socket, $this->address, $this->port);
 			if ($result === false)
-				$log->println('[ERROR] Connexion failed : ' . $this->getLastSocketError(), ERROR_COLOR, true);
+				$log->println('[ERROR] Connexion failed : ' . $this->getLastSocketError(), COLOR_ERROR, true);
 
 			if(!socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 1, "usec" => 50000)))
-				$log->println('[ERROR] Socket Option Failed : couldn\'t set reception timeout', ERROR_COLOR, true);
+				$log->println('[ERROR] Socket Option Failed : couldn\'t set reception timeout', COLOR_ERROR, true);
 		}
 	}
 
