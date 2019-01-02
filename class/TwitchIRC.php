@@ -12,6 +12,8 @@ class TwitchIRC
 
 	public function connect($address, $port)
 	{
+		if (!empty($this->socket))
+			$this->close();
 		$this->socket->connect($address, $port);
 	}
 
