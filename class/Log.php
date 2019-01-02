@@ -25,7 +25,7 @@ class Log
 	public function colorizeStr($message, $color)
 	{
 		$selectedColor = empty($this->colors[$color]) ? "[0m" : $this->colors[$color];
-		return chr(27) . $selectedColor . $message . chr(27) . chr(27) . "[0m" . chr(27);
+		return chr(27) . $selectedColor . $message . chr(27) . chr(27) . "[0m";
 	}
 
 	public function print($message, $color = 'NORMAL', $exit = false)
