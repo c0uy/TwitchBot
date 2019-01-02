@@ -28,7 +28,7 @@ class Log
 		return chr(27).$selectedColor.$message.chr(27).chr(27)."[0m".chr(27);
 	}
 
-	public function print($message, $breakLine = true, $exit, $color = 'NORMAL')
+	public function print($message, $breakLine = true, $exit = false, $color = 'NORMAL')
 	{
 		$str = $this->colorizeStr($message, $color).($breakLine ? PHP_EOL : '');
 		if($exit)
