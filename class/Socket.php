@@ -75,7 +75,7 @@ class Socket
 		$buffer = '';
 		while ($data = socket_read($this->socket, 2048))
 			$buffer .= $data;
-		return $buffer;
+		return trim($buffer);
 	}
 
 	public function getLastSocketError() {
