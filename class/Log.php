@@ -22,9 +22,13 @@ class Log
 		'REVERSE'		=>	"[7m"
 	);
 
-	public function print($message, $breakLine = true, $color = 'NORMAL')
+	public function print($message, $breakLine = true, $exit, $color = 'NORMAL')
 	{
 		$selectedColor = empty($this->colors[$color]) ? "[0m" : $this->colors[$color];
-		echo chr(27).$selectedColor.$message.chr(27).chr(27)."[0m".chr(27).($breakLine ? PHP_EOL : '');
+		$str = chr(27).$selectedColor.$message.chr(27).chr(27)."[0m".chr(27).($breakLine ? PHP_EOL : '');
+		if($exit)
+			echo $str;
+		else
+			exit($str);
 	}
 }
