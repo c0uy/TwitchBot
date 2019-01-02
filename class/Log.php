@@ -28,7 +28,7 @@ class Log
 		return chr(27).$selectedColor.$message.chr(27).chr(27)."[0m".chr(27);
 	}
 
-	public function print($message, $exit = false, $color = 'NORMAL')
+	public function print($message, $color = 'NORMAL', $exit = false)
 	{
 		$str = $this->colorizeStr($message, $color);
 		if($exit)
