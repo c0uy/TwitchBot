@@ -53,4 +53,12 @@ class TwitchIRC
 			$this->channel = $channel;
 		return $isJoined;
 	}
+
+	public function sendMessage($message)
+	{
+		if(!empty($this->channel))
+			$this->send('PRIVMSG #'.$this->channel.' : '.$message);
+		else
+			echo '[ERROR] No channel were joined'.PHP_EOL;
+	}
 }
