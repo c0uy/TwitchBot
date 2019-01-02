@@ -64,13 +64,13 @@ class TwitchIRC
 		$log->print(' : ');
 
 		$this->send('JOIN #'.$channel);
-		$isJoined = !empty($this->read());
-		if ($isJoined)
+		$res = !empty($this->read());
+		if ($res)
 			$this->channel = $channel;
 
-		$log->println($isJoined ? 'success' : 'failed', $isJoined ? COLOR_SUCCESS : COLOR_ERROR);
+		$log->println($res ? 'success' : 'failed', $res ? COLOR_SUCCESS : COLOR_ERROR);
 
-		return $isJoined;
+		return $res;
 	}
 
 	public function part()
