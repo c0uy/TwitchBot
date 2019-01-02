@@ -44,6 +44,7 @@ class Socket
 	 */
 	public function close()
 	{
+		if (!empty($this->socket))
 		socket_close($this->socket);
 	}
 
