@@ -5,8 +5,6 @@ require '../autoload.php';
 $address = 'www.example.com';
 $port = 'www';
 
-$log->println('Target '.$address.':'.$port);
-
 $socket = new Socket();
 $socket->connect($address, $port);
 
@@ -20,5 +18,4 @@ $socket->send($message);
 $log->println('Receiving Data ...');
 $log->print($socket->read(), 'GREEN');
 
-$log->println('Closing connexion ...');
 $socket->close();
