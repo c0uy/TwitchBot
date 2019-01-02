@@ -5,20 +5,20 @@ require '../autoload.php';
 $address = 'www.example.com';
 $port = 'www';
 
-echo 'Target '.$address.':'.$port.PHP_EOL;
+$log->println('Target '.$address.':'.$port);
 
 $socket = new Socket();
 $socket->connect($address, $port);
 
+$log->println('Sending Data ...');
 $message = "HEAD / HTTP/1.0\r\n\r\n";
 $message .= "Host: www.example.com\r\n";
 $message .= "Connection: Close\r\n\r\n";
-
-echo 'Sending Data ...'.PHP_EOL;
+$log->print($message, 'GREEN');
 $socket->send($message);
 
-echo 'Receiving Data ...'.PHP_EOL;
-echo $socket->read().PHP_EOL;
+$log->println('Receiving Data ...');
+$log->print($socket->read(), 'GREEN');
 
-echo 'Closing connexion ...'.PHP_EOL;
+$log->println('Closing connexion ...');
 $socket->close();
