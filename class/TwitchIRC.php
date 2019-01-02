@@ -33,6 +33,12 @@ class TwitchIRC
 
 	public function login($username, $oauth)
 	{
+		global $log;
+
+		$log->print('Logging as ');
+		$log->print($username, COLOR_INFO);
+		$log->print(' : ');
+
 		$this->send('PASS oauth:'.$oauth);
 		$this->send('NICK '.$username);
 
@@ -43,15 +49,27 @@ class TwitchIRC
 			if(!empty($bufferExp[2]) && trim($bufferExp[2]) !== 'Login authentication failed')
 				$res = true;
 		}
+
+		$log->println($res ? 'success' : 'failed', $res ? COLOR_SUCCESS : COLOR_ERROR);
+
 		return $res;
 	}
 
 	public function join($channel)
 	{
+		global $log;
+
+		$log->print('Joining channel ');
+		$log->print($channel, COLOR_INFO);
+		$log->print(' : ');
+
 		$this->send('JOIN #'.$channel);
 		$isJoined = !empty($this->read());
 		if ($isJoined)
 			$this->channel = $channel;
+
+		$log->println($isJoined ? 'success' : 'failed', $isJoined ? COLOR_SUCCESS : COLOR_ERROR);
+
 		return $isJoined;
 	}
 
