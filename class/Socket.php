@@ -19,6 +19,9 @@ class Socket
 	{
 		global $log;
 
+		$log->print('Connecting to ');
+		$log->println($address.':'.$port, COLOR_INFO);
+
 		// Address & Port
 		if ($this->setAddress($address) === false)
 			$log->println('[ERROR] Invalid address : ' . $address, ERROR_COLOR, true);
@@ -46,8 +49,12 @@ class Socket
 	 */
 	public function close()
 	{
-		if (!empty($this->socket))
+		global $log;
+
+		if (!empty($this->socket)) {
+			$log->println('Closing connection ...');
 			socket_close($this->socket);
+		}
 	}
 
 	/**
