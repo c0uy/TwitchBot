@@ -17,25 +17,27 @@ class Socket
 	 */
 	public function connect($address, $port)
 	{
+		global $log;
+
 		// Address & Port
 		if ($this->setAddress($address) === false)
-			exit('[ERROR] Invalid address : ' . $address . PHP_EOL);
+			$log->println('[ERROR] Invalid address : ' . $address, ERROR_COLOR, true);
 		if ($this->setPort($port) === false)
-			exit('[ERROR] Invalid port : ' . $port . PHP_EOL);
+			$log->println('[ERROR] Invalid port : ' . $port, ERROR_COLOR, true);
 
 		if(!empty($this->address) && !empty($this->port)) {
 			// Socket Creation
 			$this->socket = socket_create($this->domains[$this->version], SOCK_STREAM, SOL_TCP);
 			if ($this->socket === false)
-				exit('[ERROR] Socket creation failed : ' . $this->getLastSocketError() . PHP_EOL);
+				$log->println('[ERROR] Socket creation failed : ' . $this->getLastSocketError(), ERROR_COLOR, true);
 
 			// Socket Connection
 			$result = socket_connect($this->socket, $this->address, $this->port);
 			if ($result === false)
-				exit('[ERROR] Connexion failed : ' . $this->getLastSocketError() . PHP_EOL);
+				$log->println('[ERROR] Connexion failed : ' . $this->getLastSocketError(), ERROR_COLOR, true);
 
 			if(!socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 1, "usec" => 50000)))
-				exit('[ERROR] Socket Option Failed : couldn\'t set reception timeout'.PHP_EOL);
+				$log->println('[ERROR] Socket Option Failed : couldn\'t set reception timeout', ERROR_COLOR, true);
 		}
 	}
 

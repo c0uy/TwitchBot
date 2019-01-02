@@ -22,9 +22,27 @@ class Log
 		'REVERSE'		=>	"[7m"
 	);
 
-	public function print($message, $breakLine = true, $color = 'NORMAL')
+	public function colorizeStr($message, $color)
 	{
 		$selectedColor = empty($this->colors[$color]) ? "[0m" : $this->colors[$color];
-		echo chr(27).$selectedColor.$message.chr(27).chr(27)."[0m".chr(27).($breakLine ? PHP_EOL : '');
+		return chr(27) . $selectedColor . $message . chr(27) . chr(27) . "[0m" . chr(27);
+	}
+
+	public function print($message, $color = 'NORMAL', $exit = false)
+	{
+		$str = $this->colorizeStr($message, $color);
+		if($exit)
+			exit($str);
+		else
+			echo $str;
+	}
+
+	public function println($message, $color = 'NORMAL', $exit = false)
+	{
+		$str = $this->colorizeStr($message, $color) . PHP_EOL;
+		if($exit)
+			exit($str);
+		else
+			echo $str;
 	}
 }
