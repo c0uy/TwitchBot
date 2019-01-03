@@ -19,4 +19,7 @@ require_once 'class/TwitchIRC.php';
 
 $log = new Log();
 
-$config = json_decode(file_get_contents(FILE_CONF), JSON_OBJECT_AS_ARRAY);
+if(file_exists(FILE_CONF) && is_readable(FILE_CONF))
+	$config = json_decode(file_get_contents(FILE_CONF), JSON_OBJECT_AS_ARRAY);
+else
+	$log->println('[ERROR] Config file ' . FILE_CONF . ' does not exists or not readable.', COLOR_ERROR);
