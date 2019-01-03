@@ -5,22 +5,22 @@ require 'autoload.php';
 $irc = new TwitchIRC();
 $irc->connect($config['server']['address'], $config['server']['port']);
 
-if($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc->join($config['server']['channel'])) {
+if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc->join($config['server']['channel'])) {
 
 	$irc->sendMessage('Bienvenue sur la chaine de '.$config['server']['channel']);
 
-	while(true) {
+	while (true) {
 		$buffer = $irc->read();
 
-		if(!empty($buffer)) {
-			if($irc->isPing($buffer))
+		if (!empty($buffer)) {
+			if ($irc->isPing($buffer))
 				$irc->sendPong();
 			else {
-				if($irc->isMessage($buffer)) {
+				if ($irc->isMessage($buffer)) {
 					$message = $irc->parseMessage($buffer);
 					$isCMD = strpos($message['content'], CMD_PREFIX) === 0;
 
-					if($isCMD) {
+					if ($isCMD) {
 						$message['content'] = ltrim($message['content'], CMD_PREFIX);
 
 						$log->print(date('H:i:s', time()) . ' < ');
