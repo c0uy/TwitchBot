@@ -17,18 +17,13 @@ if($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc-
 				$irc->sendPong();
 			else {
 				if($irc->isMessage($buffer)) {
-					$bufferExp = explode(':', $buffer);
-
-					$username = explode('!', $bufferExp[1])[0];
-					unset($bufferExp[0]);
-					unset($bufferExp[1]);
-					$message = implode(':', $bufferExp);
+					$message = $irc->parseMessage($buffer);
 
 					$log->print(date('H:i:s', time()) . ' < ');
-					$log->print($username . ' : ', COLOR_USER_NICK);
-					$log->println($message, COLOR_USER_MESSAGE);
+					$log->print($message['nick'] . ' : ', COLOR_USER_NICK);
+					$log->println($message['content'], COLOR_USER_MESSAGE);
 
-					if ($bufferExp[2] == '!ping')
+					if ($message['content'] == '!ping')
 						$irc->sendMessage('pong');
 				}
 			}

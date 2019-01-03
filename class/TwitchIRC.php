@@ -107,4 +107,15 @@ class TwitchIRC
 	public function isMessage($str) {
 		return strpos($str, 'PRIVMSG') !== false;
 	}
+
+	public function parseMessage($str) {
+		$strExp = explode(':', $str);
+
+		$nick = explode('!', $strExp[1])[0];
+		unset($strExp[0]);
+		unset($strExp[1]);
+		$message = implode(':', $strExp);
+
+		return array('nick' => $nick, 'content' => $message);
+	}
 }
