@@ -10,11 +10,13 @@ define('COLOR_BOT_MESSAGE', 'LIGHT_BLUE');
 define('COLOR_USER_NICK', 'CYAN');
 define('COLOR_USER_MESSAGE', 'NORMAL');
 
+define('FILE_CONF', 'config.json');
+
 // PHP Classes
 require_once 'class/Log.php';
 require_once 'class/Socket.php';
 require_once 'class/TwitchIRC.php';
 
-$config = json_decode(file_get_contents('config.json'), JSON_OBJECT_AS_ARRAY);
+$config = json_decode(file_get_contents(FILE_CONF), JSON_OBJECT_AS_ARRAY);
 
 $log = new Log();
