@@ -97,8 +97,8 @@ class TwitchIRC
 		global $log;
 
 		if(!empty($this->channel)) {
-			$log->print(date('H:i', time()));
-			$log->println('> '.$message, COLOR_BOT_MESSAGE);
+			$log->print(date('H:i:s', time()));
+			$log->println(' > '.$message, COLOR_BOT_MESSAGE);
 			$this->send('PRIVMSG #'.$this->channel.' : '.$message);
 		} else
 			echo '[ERROR] No channel were joined'.PHP_EOL;
