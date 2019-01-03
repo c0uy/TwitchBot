@@ -1,0 +1,11 @@
+{
+    "server": {
+        "address": "irc.chat.twitch.tv",
+        "port": 6667,
+        "channel": "th0ny_"
+    },
+    "account": {
+        "nick": "couybot",
+        "oauth": ""
+    }
+}
