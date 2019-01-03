@@ -27,8 +27,10 @@ if($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc-
 						$log->print($message['nick'] . ' : ', COLOR_USER_NICK);
 						$log->println($message['content'], COLOR_USER_MESSAGE);
 
-						if ($message['content'] == 'ping')
-							$irc->sendMessage('pong');
+						switch ($message['content']) {
+							case 'ping':
+								$irc->sendMessage('pong');
+						}
 					}
 				}
 			}
