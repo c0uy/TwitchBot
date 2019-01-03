@@ -2,19 +2,12 @@
 
 require 'autoload.php';
 
-$address = 'irc.chat.twitch.tv';
-$port = 6667;
-
-$access_token = '';
-$nick = 'couybot';
-$channel = 'th0ny_';
-
 $irc = new TwitchIRC();
-$irc->connect($address, $port);
+$irc->connect($config['server']['address'], $config['server']['port']);
 
-if($irc->login($nick, $access_token) && $irc->join($channel)) {
+if($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc->join($config['server']['channel'])) {
 
-	$irc->sendMessage('Bienvenue sur la chaine de '.$channel);
+	$irc->sendMessage('Bienvenue sur la chaine de '.$config['server']['channel']);
 
 	while(true) {
 		$buffer = $irc->read();
