@@ -103,4 +103,8 @@ class TwitchIRC
 		} else
 			echo '[ERROR] No channel were joined'.PHP_EOL;
 	}
+
+	public function isMessage($str) {
+		return strpos($str, 'PRIVMSG') !== false;
+	}
 }

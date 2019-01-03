@@ -16,7 +16,7 @@ if($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc-
 			if($irc->isPing($buffer))
 				$irc->sendPong();
 			else {
-				if(strpos($buffer, 'PRIVMSG') !== false) {
+				if($irc->isMessage($buffer)) {
 					$bufferExp = explode(':', $buffer);
 
 					$username = explode('!', $bufferExp[1])[0];
