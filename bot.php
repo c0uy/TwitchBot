@@ -31,6 +31,9 @@ if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc
 							case 'ping':
 								$irc->sendMessage('pong');
 								break;
+							case 'datetime':
+								$irc->sendMessage(date('d/m/Y H:i:s', time()));
+								break;
 						}
 					}
 				}
