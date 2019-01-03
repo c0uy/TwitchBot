@@ -10,6 +10,7 @@ if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc
 	$irc->sendMessage('Bienvenue sur la chaine de '.$config['server']['channel']);
 
 	while (true) {
+		$actualTime = time();
 		$buffer = $irc->read();
 
 		if (!empty($buffer)) {
@@ -23,7 +24,7 @@ if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc
 					if ($isCMD) {
 						$message['content'] = ltrim($message['content'], CMD_PREFIX);
 
-						$log->print(date('H:i:s', time()) . ' < ');
+						$log->print(date('H:i:s', $actualTime) . ' < ');
 						$log->print($message['nick'] . ' : ', COLOR_USER_NICK);
 						$log->println($message['content'], COLOR_USER_MESSAGE);
 
@@ -32,13 +33,13 @@ if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc
 								$irc->sendMessage('pong');
 								break;
 							case 'datetime':
-								$irc->sendMessage(date('d/m/Y H:i:s', time()));
+								$irc->sendMessage(date('d/m/Y H:i:s', $actualTime));
 								break;
 							case 'date':
-								$irc->sendMessage(date('d/m/Y', time()));
+								$irc->sendMessage(date('d/m/Y', $actualTime));
 								break;
 							case 'time':
-								$irc->sendMessage(date('H:i:s', time()));
+								$irc->sendMessage(date('H:i:s', $actualTime));
 								break;
 						}
 					}
