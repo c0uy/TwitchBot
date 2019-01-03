@@ -31,6 +31,16 @@ class TwitchIRC
 		$this->socket->close();
 	}
 
+	public function isPing($str)
+	{
+		return strpos($str, 'PING') === 0;
+	}
+
+	public function sendPong()
+	{
+		$this->send('PONG :tmi.twitch.tv');
+	}
+
 	public function login($username, $oauth)
 	{
 		global $log;
