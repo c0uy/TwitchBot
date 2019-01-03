@@ -16,19 +16,21 @@ if($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc-
 			if($irc->isPing($buffer))
 				$irc->sendPong();
 			else {
-				$bufferExp = explode(':', $buffer);
+				if(strpos($buffer, 'PRIVMSG') !== false) {
+					$bufferExp = explode(':', $buffer);
 
-				$username = explode('!', $bufferExp[1])[0];
-				unset($bufferExp[0]);
-				unset($bufferExp[1]);
-				$message = implode(':', $bufferExp);
+					$username = explode('!', $bufferExp[1])[0];
+					unset($bufferExp[0]);
+					unset($bufferExp[1]);
+					$message = implode(':', $bufferExp);
 
-				$log->print(date('H:i:s', time()).' < ');
-				$log->print($username.' : ', COLOR_USER_NICK);
-				$log->println($message, COLOR_USER_MESSAGE);
+					$log->print(date('H:i:s', time()) . ' < ');
+					$log->print($username . ' : ', COLOR_USER_NICK);
+					$log->println($message, COLOR_USER_MESSAGE);
 
-				if($bufferExp[2] == '!ping')
-					$irc->sendMessage('pong');
+					if ($bufferExp[2] == '!ping')
+						$irc->sendMessage('pong');
+				}
 			}
 		}
 
