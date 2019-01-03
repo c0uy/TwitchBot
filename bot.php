@@ -37,6 +37,9 @@ if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc
 							case 'date':
 								$irc->sendMessage(date('d/m/Y', time()));
 								break;
+							case 'time':
+								$irc->sendMessage(date('H:i:s', time()));
+								break;
 						}
 					}
 				}
