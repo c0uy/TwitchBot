@@ -18,14 +18,14 @@ if($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc-
 			else {
 				if($irc->isMessage($buffer)) {
 					$message = $irc->parseMessage($buffer);
-					$isCMD = strpos($message['content'], '!') === 0;
+					$isCMD = strpos($message['content'], CMD_PREFIX) === 0;
 
 					if($isCMD) {
 						$log->print(date('H:i:s', time()) . ' < ');
 						$log->print($message['nick'] . ' : ', COLOR_USER_NICK);
 						$log->println($message['content'], COLOR_USER_MESSAGE);
 
-						if ($message['content'] == '!ping')
+						if ($message['content'] == CMD_PREFIX.'ping')
 							$irc->sendMessage('pong');
 					}
 				}
