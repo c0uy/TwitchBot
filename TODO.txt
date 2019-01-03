@@ -1,0 +1,3 @@
+TODO: Chat Time Limit
+TODO: Keep motd & users already connected
+TODO: SSL Support
