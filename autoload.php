@@ -12,6 +12,8 @@ define('COLOR_USER_MESSAGE', 'NORMAL');
 
 define('FILE_CONF', 'config.json');
 
+define('CMD_PREFIX', '!');
+
 // PHP Classes
 require_once 'class/Log.php';
 require_once 'class/Socket.php';
