@@ -21,11 +21,13 @@ if($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc-
 					$isCMD = strpos($message['content'], CMD_PREFIX) === 0;
 
 					if($isCMD) {
+						$message['content'] = ltrim($message['content'], CMD_PREFIX);
+
 						$log->print(date('H:i:s', time()) . ' < ');
 						$log->print($message['nick'] . ' : ', COLOR_USER_NICK);
 						$log->println($message['content'], COLOR_USER_MESSAGE);
 
-						if ($message['content'] == CMD_PREFIX.'ping')
+						if ($message['content'] == 'ping')
 							$irc->sendMessage('pong');
 					}
 				}
