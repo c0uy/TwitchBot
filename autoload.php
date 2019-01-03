@@ -1,4 +1,6 @@
 <?php
+define('TAB', "\n");
+
 define('COLOR_DEFAULT', 'NORMAL');
 define('COLOR_INFO', 'YELLOW');
 define('COLOR_ERROR', 'RED');
