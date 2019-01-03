@@ -19,6 +19,7 @@ require_once 'class/TwitchIRC.php';
 
 $log = new Log();
 
+$config = null;
 if(file_exists(FILE_CONF) && is_readable(FILE_CONF))
 	$config = json_decode(file_get_contents(FILE_CONF), JSON_OBJECT_AS_ARRAY);
 else
