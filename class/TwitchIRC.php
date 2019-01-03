@@ -38,6 +38,9 @@ class TwitchIRC
 
 	public function sendPong()
 	{
+		global $log;
+
+		$log->println('Ping/Pong', 'BROWN');
 		$this->send('PONG :tmi.twitch.tv');
 	}
 
@@ -91,9 +94,12 @@ class TwitchIRC
 
 	public function sendMessage($message)
 	{
-		if(!empty($this->channel))
+		global $log;
+
+		if(!empty($this->channel)) {
+			$log->println('> '.$message, COLOR_BOT_MESSAGE);
 			$this->send('PRIVMSG #'.$this->channel.' : '.$message);
-		else
+		} else
 			echo '[ERROR] No channel were joined'.PHP_EOL;
 	}
 }
