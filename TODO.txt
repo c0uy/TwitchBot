@@ -1,2 +1,3 @@
 TODO: SSL Support
 TODO: Simplify Address/Port treatment and exits in Socket class
+TODO: Automatic messages
