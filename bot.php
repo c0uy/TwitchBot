@@ -30,6 +30,7 @@ if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc
 						switch ($message['content']) {
 							case 'ping':
 								$irc->sendMessage('pong');
+								break;
 						}
 					}
 				}
