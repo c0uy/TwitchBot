@@ -2,11 +2,12 @@
 
 require 'autoload.php';
 
+define('FILE_MESSAGES', 'messages.txt');
+
 $irc = new TwitchIRC();
 $irc->connect($config['server']['address'], $config['server']['port']);
 
-$messagesFile = 'messages.txt';
-$autoMessages = is_file($messagesFile) && is_readable($messagesFile) ? array_map('trim', array_filter(file($messagesFile))) : array();
+$autoMessages = is_file(FILE_MESSAGES) && is_readable(FILE_MESSAGES) ? array_map('trim', array_filter(file(FILE_MESSAGES))) : array();
 $actualMessageIndex = 0;
 $interval = 60 * $config['autoMessages']['interval'];
 $nextTimestamp = time() + $interval;
