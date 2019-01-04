@@ -3,13 +3,14 @@
 require 'autoload.php';
 
 define('FILE_MESSAGES', 'messages.txt');
+define('AUTOMSG_INTERVAL', 1);
 
 $irc = new TwitchIRC();
 $irc->connect($config['server']['address'], $config['server']['port']);
 
 $autoMessages = is_file(FILE_MESSAGES) && is_readable(FILE_MESSAGES) ? array_map('trim', array_filter(file(FILE_MESSAGES))) : array();
 $actualMessageIndex = 0;
-$interval = 60 * $config['autoMessages']['interval'];
+$interval = 60 * AUTOMSG_INTERVAL;
 $nextTimestamp = time() + $interval;
 
 if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc->join($config['server']['channel'])) {
