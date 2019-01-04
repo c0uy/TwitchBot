@@ -5,6 +5,12 @@ require 'autoload.php';
 $irc = new TwitchIRC();
 $irc->connect($config['server']['address'], $config['server']['port']);
 
+$messagesFile = 'messages.txt';
+$autoMessages = is_file($messagesFile) && is_readable($messagesFile) ? array_map('trim', array_filter(file($messagesFile))) : array();
+$actualMessageIndex = 0;
+$interval = 60 * 5;
+$nextTimestamp = time() + $interval;
+
 if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc->join($config['server']['channel'])) {
 
 	$irc->sendMessage('Bienvenue sur la chaine de ' . $config['server']['channel']);
@@ -12,6 +18,14 @@ if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc
 	while (true) {
 		$actualTime = time();
 		$buffer = $irc->read();
+
+		if (!empty($autoMessages) && $actualTime >= $nextTimestamp) {
+			$irc->sendMessage($autoMessages[$actualMessageIndex]);
+			$actualMessageIndex++;
+			if ($actualMessageIndex > count($autoMessages))
+				$actualMessageIndex = 0;
+			$nextTimestamp = $actualTime + $interval;
+		}
 
 		if (!empty($buffer)) {
 			if ($irc->isPing($buffer))
