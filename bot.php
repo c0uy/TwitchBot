@@ -13,8 +13,6 @@ $nextTimestamp = time() + $interval;
 
 if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc->join($config['server']['channel'])) {
 
-	$irc->sendMessage('Bienvenue sur la chaine de ' . $config['server']['channel']);
-
 	while (true) {
 		$actualTime = time();
 		$buffer = $irc->read();
