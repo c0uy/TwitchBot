@@ -8,7 +8,7 @@ $irc->connect($config['server']['address'], $config['server']['port']);
 $messagesFile = 'messages.txt';
 $autoMessages = is_file($messagesFile) && is_readable($messagesFile) ? array_map('trim', array_filter(file($messagesFile))) : array();
 $actualMessageIndex = 0;
-$interval = 60 * 5;
+$interval = 60 * $config['autoMessages']['interval'];
 $nextTimestamp = time() + $interval;
 
 if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc->join($config['server']['channel'])) {
