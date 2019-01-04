@@ -1,6 +1,7 @@
 <?php
 define('TAB', "\n");
 
+// Constant Print Colors
 define('COLOR_DEFAULT', 'NORMAL');
 define('COLOR_INFO', 'YELLOW');
 define('COLOR_ERROR', 'RED');
@@ -17,8 +18,10 @@ require_once 'class/Log.php';
 require_once 'class/Socket.php';
 require_once 'class/TwitchIRC.php';
 
+// Log global object
 $log = new Log();
 
+// Load config
 $config = null;
 if(file_exists(FILE_CONF) && is_readable(FILE_CONF))
 	$config = json_decode(file_get_contents(FILE_CONF), JSON_OBJECT_AS_ARRAY);
