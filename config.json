@@ -7,9 +7,5 @@
     "account": {
         "nick": "couybot",
         "oauth": ""
-    },
-    "autoMessages" : {
-        "interval" : 1
-    },
-    "cmdPrefix" : "!"
+    }
 }
