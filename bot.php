@@ -30,10 +30,10 @@ if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc
 				$irc->sendPong(); else {
 				if ($irc->isMessage($buffer)) {
 					$message = $irc->parseMessage($buffer);
-					$isCMD = strpos($message['content'], CMD_PREFIX) === 0;
+					$isCMD = strpos($message['content'], $config['cmdPrefix']) === 0;
 
 					if ($isCMD) {
-						$message['content'] = ltrim($message['content'], CMD_PREFIX);
+						$message['content'] = ltrim($message['content'], $config['cmdPrefix']);
 
 						$log->print(date('H:i:s', $actualTime) . ' < ');
 						$log->print($message['nick'] . ' : ', COLOR_USER_NICK);
