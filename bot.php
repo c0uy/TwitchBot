@@ -7,7 +7,7 @@ $irc->connect($config['server']['address'], $config['server']['port']);
 
 if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc->join($config['server']['channel'])) {
 
-	$irc->sendMessage('Bienvenue sur la chaine de '.$config['server']['channel']);
+	$irc->sendMessage('Bienvenue sur la chaine de ' . $config['server']['channel']);
 
 	while (true) {
 		$actualTime = time();
@@ -15,8 +15,7 @@ if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc
 
 		if (!empty($buffer)) {
 			if ($irc->isPing($buffer))
-				$irc->sendPong();
-			else {
+				$irc->sendPong(); else {
 				if ($irc->isMessage($buffer)) {
 					$message = $irc->parseMessage($buffer);
 					$isCMD = strpos($message['content'], CMD_PREFIX) === 0;

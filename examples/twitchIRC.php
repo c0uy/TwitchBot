@@ -12,7 +12,7 @@ $channel = '';
 $irc = new TwitchIRC();
 $irc->connect($address, $port);
 
-if($irc->login($nick, $access_token) && $irc->join($channel)) {
+if ($irc->login($nick, $access_token) && $irc->join($channel)) {
 	$irc->sendMessage('HEY');
 	$irc->part();
 }

@@ -18,7 +18,7 @@ class TwitchIRC
 
 	public function send($str)
 	{
-		$this->socket->send($str."\r\n");
+		$this->socket->send($str . "\r\n");
 	}
 
 	public function read()
@@ -52,14 +52,14 @@ class TwitchIRC
 		$log->print($username, COLOR_INFO);
 		$log->print(' : ');
 
-		$this->send('PASS oauth:'.$oauth);
-		$this->send('NICK '.$username);
+		$this->send('PASS oauth:' . $oauth);
+		$this->send('NICK ' . $username);
 
 		$buffer = $this->read();
 		$res = false;
-		if(!empty($buffer)) {
+		if (!empty($buffer)) {
 			$bufferExp = explode(':', explode("\n", $buffer)[0]);
-			if(!empty($bufferExp[2]) && trim($bufferExp[2]) !== 'Login authentication failed')
+			if (!empty($bufferExp[2]) && trim($bufferExp[2]) !== 'Login authentication failed')
 				$res = true;
 		}
 
@@ -76,7 +76,7 @@ class TwitchIRC
 		$log->print($channel, COLOR_INFO);
 		$log->print(' : ');
 
-		$this->send('JOIN #'.$channel);
+		$this->send('JOIN #' . $channel);
 		$res = !empty($this->read());
 		if ($res)
 			$this->channel = $channel;
@@ -88,27 +88,29 @@ class TwitchIRC
 
 	public function part()
 	{
-		if(!empty($this->channel))
-			$this->send('PART #'.$this->channel);
+		if (!empty($this->channel))
+			$this->send('PART #' . $this->channel);
 	}
 
 	public function sendMessage($message)
 	{
 		global $log;
 
-		if(!empty($this->channel)) {
+		if (!empty($this->channel)) {
 			$log->print(date('H:i:s', time()));
-			$log->println(' > '.$message, COLOR_BOT_MESSAGE);
-			$this->send('PRIVMSG #'.$this->channel.' : '.$message);
+			$log->println(' > ' . $message, COLOR_BOT_MESSAGE);
+			$this->send('PRIVMSG #' . $this->channel . ' : ' . $message);
 		} else
-			echo '[ERROR] No channel were joined'.PHP_EOL;
+			echo '[ERROR] No channel were joined' . PHP_EOL;
 	}
 
-	public function isMessage($str) {
+	public function isMessage($str)
+	{
 		return strpos($str, 'PRIVMSG') !== false;
 	}
 
-	public function parseMessage($str) {
+	public function parseMessage($str)
+	{
 		$strExp = explode(':', $str);
 
 		$nick = explode('!', $strExp[1])[0];

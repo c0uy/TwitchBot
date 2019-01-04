@@ -20,7 +20,7 @@ class Socket
 		global $log;
 
 		$log->print('Connecting to ');
-		$log->println($address.':'.$port, COLOR_INFO);
+		$log->println($address . ':' . $port, COLOR_INFO);
 
 		// Address & Port
 		if ($this->setAddress($address) === false)
@@ -28,7 +28,7 @@ class Socket
 		if ($this->setPort($port) === false)
 			$log->println('[ERROR] Invalid port : ' . $port, COLOR_ERROR, true);
 
-		if(!empty($this->address) && !empty($this->port)) {
+		if (!empty($this->address) && !empty($this->port)) {
 			// Socket Creation
 			$this->socket = socket_create($this->domains[$this->version], SOCK_STREAM, SOL_TCP);
 			if ($this->socket === false)
@@ -39,7 +39,7 @@ class Socket
 			if ($result === false)
 				$log->println('[ERROR] Connexion failed : ' . $this->getLastSocketError(), COLOR_ERROR, true);
 
-			if(!socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 1, "usec" => 50000)))
+			if (!socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, array("sec" => 1, "usec" => 50000)))
 				$log->println('[ERROR] Socket Option Failed : couldn\'t set reception timeout', COLOR_ERROR, true);
 		}
 	}
@@ -78,7 +78,8 @@ class Socket
 		return trim($buffer);
 	}
 
-	public function getLastSocketError() {
+	public function getLastSocketError()
+	{
 		return socket_strerror(socket_last_error($this->socket));
 	}
 
@@ -131,8 +132,7 @@ class Socket
 		$this->port = null;
 		$isInt = intval($port);
 		if ($isInt && $port >= 0 && $port <= 65535)
-			$this->port = $port;
-		else if (!$isInt) {
+			$this->port = $port; else if (!$isInt) {
 			$portResolv = getservbyname($port, 'tcp');
 			if ($portResolv !== false)
 				$this->port = $portResolv;
