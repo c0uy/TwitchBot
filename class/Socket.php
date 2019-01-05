@@ -78,12 +78,17 @@ class Socket
 		return trim($buffer);
 	}
 
+	/**
+	 * Returns Last Socket Error
+	 * @return string
+	 */
 	public function getLastSocketError()
 	{
 		return socket_strerror(socket_last_error($this->socket));
 	}
 
 	/**
+	 * Returns address attribute
 	 * @return mixed
 	 */
 	public function getAddress()
@@ -92,7 +97,7 @@ class Socket
 	}
 
 	/**
-	 * Validate & Record Port into memory
+	 * Validate & Record Port into address attribute
 	 * @param string $address
 	 * @return bool
 	 */
@@ -114,6 +119,7 @@ class Socket
 	}
 
 	/**
+	 * Returns port attribute
 	 * @return mixed
 	 */
 	public function getPort()
@@ -122,7 +128,7 @@ class Socket
 	}
 
 	/**
-	 * Validate & Record Port into memory
+	 * Validate & Record Port into port attribute
 	 * @param integer $port
 	 * @return bool
 	 */

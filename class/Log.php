@@ -22,25 +22,45 @@ class Log
 		'REVERSE' => "[7m"
 	);
 
+	/**
+	 * Colorize text for echo print in console
+	 * @param string $message
+	 * @param string $color
+	 * @return string
+	 */
 	public function colorizeStr($message, $color)
 	{
 		$selectedColor = empty($this->colors[$color]) ? "[0m" : $this->colors[$color];
 		return chr(27) . $selectedColor . $message . chr(27) . chr(27) . "[0m";
 	}
 
+	/**
+	 * Echo colorized string in console
+	 * @param string $message
+	 * @param string $color
+	 * @param bool $exit
+	 */
 	public function print($message, $color = 'NORMAL', $exit = false)
 	{
 		$str = $this->colorizeStr($message, $color);
 		if ($exit)
-			exit($str); else
+			exit($str);
+		else
 			echo $str;
 	}
 
+	/**
+	 * Echo colorized string in console with return char
+	 * @param string $message
+	 * @param string $color
+	 * @param bool $exit
+	 */
 	public function println($message, $color = 'NORMAL', $exit = false)
 	{
 		$str = $this->colorizeStr($message, $color) . PHP_EOL;
 		if ($exit)
-			exit($str); else
+			exit($str);
+		else
 			echo $str;
 	}
 }

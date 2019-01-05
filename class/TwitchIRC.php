@@ -10,32 +10,56 @@ class TwitchIRC
 		$this->socket = new Socket();
 	}
 
+	/**
+	 * Connects to server (closes previous connexion)
+	 * @param string $address
+	 * @param integer $port
+	 */
 	public function connect($address, $port)
 	{
 		$this->close();
 		$this->socket->connect($address, $port);
 	}
 
+	/**
+	 * Sends string to server
+	 * @param string $str
+	 */
 	public function send($str)
 	{
 		$this->socket->send($str . "\r\n");
 	}
 
+	/**
+	 * Reads received message
+	 * @return string
+	 */
 	public function read()
 	{
 		return $this->socket->read();
 	}
 
+	/**
+	 * Closes connexion
+	 */
 	public function close()
 	{
 		$this->socket->close();
 	}
 
+	/**
+	 * Checks if received message is a PING string
+	 * @param string $str
+	 * @return bool
+	 */
 	public function isPing($str)
 	{
 		return strpos($str, 'PING') === 0;
 	}
 
+	/**
+	 * Sends PONG answer to PING query
+	 */
 	public function sendPong()
 	{
 		global $log;
@@ -44,6 +68,12 @@ class TwitchIRC
 		$this->send('PONG :tmi.twitch.tv');
 	}
 
+	/**
+	 * Authenticates user
+	 * @param string $username
+	 * @param string $oauth
+	 * @return bool
+	 */
 	public function login($username, $oauth)
 	{
 		global $log;
@@ -68,6 +98,11 @@ class TwitchIRC
 		return $res;
 	}
 
+	/**
+	 * Sends JOIN command
+	 * @param string $channel
+	 * @return bool
+	 */
 	public function join($channel)
 	{
 		global $log;
@@ -86,12 +121,19 @@ class TwitchIRC
 		return $res;
 	}
 
+	/**
+	 * Leaves joined channel
+	 */
 	public function part()
 	{
 		if (!empty($this->channel))
 			$this->send('PART #' . $this->channel);
 	}
 
+	/**
+	 * Sends chat message to joined channel
+	 * @param string $message
+	 */
 	public function sendMessage($message)
 	{
 		global $log;
@@ -104,11 +146,21 @@ class TwitchIRC
 			echo '[ERROR] No channel were joined' . PHP_EOL;
 	}
 
+	/**
+	 * Checks if string is a chat message
+	 * @param string $str
+	 * @return bool
+	 */
 	public function isMessage($str)
 	{
 		return strpos($str, 'PRIVMSG') !== false;
 	}
 
+	/**
+	 * Parses chat message to extract nick and message content
+	 * @param string $str
+	 * @return array
+	 */
 	public function parseMessage($str)
 	{
 		$strExp = explode(':', $str);
