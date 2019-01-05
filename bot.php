@@ -25,7 +25,7 @@ if ($irc->login($config['account']['nick'], $config['account']['oauth']) && $irc
 		if (!empty($autoMessages) && $actualTime >= $nextTimestamp) {
 			$irc->sendMessage($autoMessages[$actualMessageIndex]);
 			$actualMessageIndex++;
-			if ($actualMessageIndex > count($autoMessages))
+			if ($actualMessageIndex >= count($autoMessages))
 				$actualMessageIndex = 0;
 			$nextTimestamp = $actualTime + $interval;
 		}
